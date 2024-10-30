@@ -1,0 +1,651 @@
+
+@import "variables";
+@import "utilities";
+@import "mixins";
+@import "fonts";
+@import "grid";
+
+/*
+ * 	Main styling for the plugin
+ */
+	html.interactive {
+		font-size: 16px;
+		padding: 0;
+
+		body {
+			padding: 0 $padding;
+			background: $black;
+
+			// Adblocker fix
+			&.sponsored-post {
+				display: block !important;
+			}
+		}
+	}
+
+	/*
+	 * 	Interactive Header
+	 */
+	.interactive-header {
+		position: absolute;
+		width: 100vw;
+		height: 50px;
+		top: 0;
+		left: 0;
+		padding: $padding;
+		text-align: left;
+		z-index: 1000;
+		font-size: 0;
+		opacity: 0;
+		@include transition(opacity 0.6s);
+
+		&.opaque {
+			opacity: 1;
+		}
+
+		a {
+			@include transition(opacity 0.3s);
+
+			&.brand {
+				color: white;
+				font-size: 20px;
+				font-weight: 600;
+				font-size: 0;
+			    display: inline-block;
+			    height: 100%;
+			    opacity: 0.9;
+			    @include transition(opacity 0.6s);
+
+			    &:hover {
+					opacity: 1;
+				}
+
+				img {
+					height: 100%;
+					margin: 0;
+					@include invert(100%);
+				}
+			}
+		}
+
+		.title {
+			font-size: 20px;
+		}
+
+		.social-share {
+			position: absolute;
+			right: 0;
+			top: 0;
+			height: 100%;
+			text-align: right;
+			padding: 13px 20px;
+
+			a.link {
+				display: inline-block;
+				font-size: 18px;
+				color: white;
+				margin-left: 18px;
+				opacity: 0.8;
+
+				&.twitter {
+					font-size: 20px;
+					position: relative;
+					top: 1px;
+				}
+
+				&:hover {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	/*
+	 * 	Interactive Section
+	 */
+	.interactive-section {
+		width: 100%;
+		min-height: 100vh;
+		position: relative;
+		@include transition(opacity 0.6s);
+
+		progress {
+			position: fixed;
+			top: 0;
+			left: 0;
+			z-index: 100;
+			width: 100%;
+			height: 4px;
+			opacity: 0.9;
+		}
+
+		progress[value] {
+			border: none;
+			display: block;
+			@include appearance(none);
+		}
+
+		progress[value]::-webkit-progress-bar {
+			background-color: transparent;
+			@include border-radius(2px);
+			@include box-shadow(0 2px 5px rgba(0, 0, 0, 0.25) inset);
+		}
+
+		progress[value]::-webkit-progress-value {
+			background-size: 35px 20px, 100% 100%, 100% 100%;
+			@include border-radius(2px);
+		}
+
+		progress[value]::-moz-progress-bar {
+			@include box-shadow(0 2px 5px rgba(0, 0, 0, 0.25) inset);
+			@include border-radius(2px);
+		}
+
+		.scroll-icon {
+			position: fixed;
+			bottom: 2px;
+			left: 50%;
+			font-size: 3vw;
+			color: $white;
+			opacity: 0.9;
+			@include transition(opacity 0.8s ease 0.35s);
+			@include translateX(-50%);
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+
+		// div may be used to create margins after certain elements
+		.content div {
+			min-height: 10px;
+		}
+
+		.content div, p, h1, h2, h6 {
+			color: $white;
+		}
+
+		/*
+			Intro styling
+		*/
+		&.cover {
+
+			h1, h2, p, p.byline {
+				max-width: 610px;
+			    font-weight: 600;
+			    margin: 0 auto;
+			    padding: 0 $margin;
+			    width: 100%;
+			    @include text-shadow(0 0 5px rgba(0,0,0,0.8));
+			}
+
+			h1, h2 {
+				font-size: 36px;
+				line-height: 1.2;
+				margin-top: 3rem;
+				margin-bottom: 1rem;
+			}
+
+			p {
+				font-size: 18px;
+				line-height: 1.5rem;
+				margin-bottom: 1rem;
+
+				&.byline {
+					font-weight: 600;
+					margin-top: -0.5rem;
+					margin-bottom: 0.5rem;
+				}
+			}
+		}
+
+		/*
+			Body styling
+		*/
+		h2, p {
+			max-width: 610px;
+			margin: 0 auto;
+			padding: 0 $margin;
+		}
+
+		h2 {
+			font-size: 26px;
+			font-weight: 700;
+			margin-bottom: 1.25rem;
+		}
+
+		p {
+			font-size: 1.0625rem;
+			line-height: 1.625rem;
+			letter-spacing: -.004em;
+		    font-weight: 400;
+		    margin-bottom: 1.25rem;
+
+		    &.intro-para {
+			    font-size: 1.2rem;
+			    line-height: 1.5rem;
+			    font-weight: 400;
+			    letter-spacing: 0;
+			    margin-bottom: 1rem;
+			}
+
+			&.byline {
+				font-size: 0.89rem;
+				display: block;
+			}
+		}
+
+		// Blockquote
+		blockquote p {
+			font-size: 36px;
+			font-weight: 700;
+			line-height: 1.2;
+			width: 100%;
+			max-width: 610px;
+		    padding: 0 $margin;
+			margin-top: 1rem auto;
+			@include text-shadow(0 0 5px rgba(0,0,0,0.8));
+		}
+
+		/*
+			Large styling
+		*/
+		&.large {
+
+			h2 {
+				font-size: 30px;
+				line-height: 1.45em;
+				font-weight: 700;
+				margin-bottom: 1.25rem;
+			}
+
+			p {
+			    font-size: 1.15rem;
+			    line-height: 1.61em;
+			    font-weight: 500;
+			    letter-spacing: -.003em;
+
+			    &.intro-para {
+					font-size: 1.4rem;
+					line-height: 31px;
+	    			font-weight: 500;
+				    letter-spacing: -.003em;
+				}
+			}
+		}
+
+		/*
+			Downloads
+		*/
+		&.downloads {
+		    font-size: 14px;
+
+			h2 {
+			    font-size: 24px;
+			    font-weight: 700;
+				margin-bottom: 30px;
+				padding: 0;
+			}
+
+			a {
+				position: relative;
+				top: -2px;
+				font-size: 10px;
+				color: inherit;
+				text-transform: uppercase;
+				border-bottom: 1px solid;
+			}
+
+			.file {
+			    margin-bottom: 11px;
+			}
+		}
+
+		/*
+			Interactive embeds
+		*/
+		iframe {
+			max-width: 100%;
+		    padding-top: 0;
+			margin-bottom: $margin;
+		}
+
+		.wp-video {
+		    margin: 0 auto;
+		}
+	}
+
+
+	/*
+	 * 	Interactive Background
+	 */
+	.interactive-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 1;
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	    background-position: center center;
+
+		/* Compensate for embedded 16:9 video */
+		&.gif {
+			top: -5%;
+			height: 110%;
+		}
+
+		iframe {
+			width: 100%;
+			height: 100%;
+			border: none;
+		}
+
+		video {
+			border: none;
+			object-fit: cover;
+			width: 100%;
+			height: 110%;
+			position: relative;
+			top: -5%;
+			pointer-events: none;
+		}
+	}
+
+	/*
+	 * 	Interactive text
+	 */
+	.interactive-text {
+		position: relative;
+		top: 0;
+		margin: 0 auto;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		max-width: 700px;
+		flex-wrap: nowrap;
+		justify-content: center;
+		z-index: 2;
+		clear: both;
+
+		.content {
+			position: relative;
+			margin-top: 0;
+			overflow: visible;
+			max-width: 100%;
+			height: fit-content;
+			flex-basis: auto;
+
+			h2 a {
+				text-decoration: underline;
+				color: inherit;
+			}
+		}
+	}
+
+	/*
+		Dark style
+	*/
+	.style-black {
+
+		.interactive-background {
+			background-color: $black;
+		}
+	}
+
+	/*
+		White style
+	*/
+	.style-white {
+		color: $black;
+
+		.interactive-background  {
+			background-color: $white;
+		}
+
+		.caption, .caption-left, .caption-center, .caption-right {
+			color: $black;
+		}
+	}
+
+	.interactive-section.style-white {
+
+		.content div, p, h1, h2, h6 {
+			color: $black;
+		}
+
+		blockquote p {
+			@include text-shadow( 0 0 5px rgba(0,0,0,0.2) );
+		}
+
+        .caption, .caption-left, .caption-center, .caption-right {
+            @include text-shadow(0 0 8px rgba(0,0,0,0.2));
+
+            p {
+                @include text-shadow(0 0 8px rgba(0,0,0,0.2));
+            }
+        }
+
+		// white cover
+		&.cover {
+
+			h1, h2, p, p.byline, p.intro-byline {
+			    @include text-shadow( 0 0 5px rgba(0,0,0,0.2) );
+			}
+		}
+	}
+
+	/*
+		Links
+	*/
+	p a {
+		color: inherit;
+		border-bottom: 1px solid;
+		display: inline-block;
+		line-height: 1em;
+		@include transition(opacity 0.6s);
+
+		&:hover {
+			color: inherit;
+			opacity: 0.6;
+		}
+	}
+
+	/*
+		Captions
+	*/
+	.caption, .caption-left, .caption-center, .caption-right {
+	    font-size: 1rem;
+        line-height: 1.625;
+	    font-weight: 600;
+	    clear: both;
+	    padding: 0 $margin;
+	    max-width: 230px;
+	    text-transform: uppercase;
+	    @include text-shadow(0 0 8px rgba(0,0,0,0.8));
+
+		p {
+		    font-size: 1rem;
+	        line-height: 1.5;
+		    font-weight: 600;
+		    text-transform: uppercase;
+		    @include text-shadow(0 0 8px rgba(0,0,0,0.8));
+		}
+	}
+
+	/*
+		Positioning
+	*/
+	.position-left, .caption-left {
+		float: left;
+		width: fit-content;
+	}
+
+	.position-center, .caption-center {
+		margin-left: auto;
+		margin-right: auto;
+		width: fit-content;
+	}
+
+	.position-right, .caption-right {
+		float: right;
+		width: fit-content;
+	}
+
+
+
+/* Desktop */
+@media all and (min-width: 768px) {
+
+	progress {
+		height: 3px;
+	}
+
+	.interactive-section {
+
+		/* Body */
+		h2, p {
+		    padding: 0;
+		}
+
+		p {
+		    font-size: 1.2rem;
+		    line-height: 1.615em;
+		    letter-spacing: -.003em;
+
+		    &.intro-para {
+				font-size: 1.5rem;
+				letter-spacing: -.5px;
+				line-height: 2.1875rem;
+				font-weight: 400;
+				margin-bottom: 1.8125rem;
+			}
+		}
+
+		/* Cover */
+		&.cover h1 {
+			margin-top: 0;
+		}
+
+		/* Large */
+		&.large {
+		    padding: 0;
+
+			h2, p {
+			    padding: 0;
+			}
+
+			h2 {
+			    font-size: 30px;
+			}
+
+			p {
+			    font-size: 1.3125rem;
+			    line-height: 1.73em;
+
+			    &.intro-para {
+					font-size: 1.55rem;
+					line-height: 36px;
+				}
+			}
+		}
+	}
+}
+
+/*
+	Related articles - Flexslider
+*/
+
+.interactive-section .flexslider {
+	background: transparent;
+	border: none;
+	max-width: 610px;
+	margin: 0 auto;
+}
+
+	.interactive-section .flexslider .flex-item {
+		display: block;
+		min-width: 260px;
+		min-height: 160px;
+		position: relative;
+		background-size: cover;
+		background-position: center center;
+	}
+
+	.interactive-section .flex-caption {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		color: white;
+		width: 100%;
+		padding: 2%;
+		background: transparentize( $black, 0.5);
+		color: $white;
+		font-size: 14px;
+		line-height: 18px;
+		letter-spacing: 0;
+		margin: 0;
+		max-width: none;
+		text-align: center;
+		@include text-shadow(0 -1px 0 rgba(0,0,0,0.3));
+	}
+
+	.flex-direction-nav a:before {
+	    font-size: 30px;
+	    color: transparentize( $white, 0.9);
+	}
+
+
+/* Large screen */
+@media all and (min-width: 1550px) {
+
+	.interactive-section .scroll-icon {
+		font-size: 2vw;
+	}
+}
+
+@media all and (max-width: 1000px) {
+	.interactive-section .scroll-icon {
+		font-size: 5vw;
+	}
+}
+
+/* Mobile */
+@media all and (max-width: 767px) {
+
+	.interactive-section {
+
+		.scroll-icon {
+			font-size: 9vw;
+		}
+
+		.content {
+			margin-top: 3rem;
+
+			/* Mobile: the first element needs to have top-padding to not overlap - Especially iPhone5 */
+			p:first-child, h1:first-child, h2:first-child  {
+				margin-top: 3rem;
+			}
+		}
+	}
+}
+
+/* iPhone 5 and smaller */
+@media all and (max-width: 350px) {
+
+	.interactive-section {
+
+		.scroll-icon {
+			font-size: 11vw;
+		}
+
+		&.cover .content {
+
+			/* Mobile: the first element needs to have top-padding to not overlap - Especially iPhone5 */
+			p:first-child, h1:first-child, h2:first-child {
+				margin-top: 4rem;
+			}
+		}
+	}
+}
